@@ -69,10 +69,10 @@ function initTaskboard() {
 
             "users"             : "/users?fetch=displayname,loginname,emailaddress,objectid" + paging,
 
-            "tasks"             : "/tasks?fetch=taskindex,name,objectid,formattedid,owner,blocked,estimate,todo,actuals,state,workproduct&query=(Iteration = ${iteration})" + scoping + paging,
+            "tasks"             : "/tasks?fetch=description,notes,taskindex,name,objectid,formattedid,owner,blocked,estimate,todo,actuals,state,workproduct&query=(Iteration = ${iteration})" + scoping + paging,
 
-            "stories"           : "/hierarchicalrequirement?fetch=rank,blocked,formattedid,name,objectid,owner,project,schedulestate,taskestimatetotal,taskremainingtotal,taskactualtotal,tasks&order=Rank&query=(Iteration = ${iteration})" + scoping + paging,
-            "defects"           : "/defect?fetch=rank,blocked,formattedid,name,objectid,owner,project,schedulestate,taskestimatetotal,taskremainingtotal,taskactualtotal&order=Rank&query=(Iteration = ${iteration})" + scoping + paging,
+            "stories"           : "/hierarchicalrequirement?fetch=description,notes,rank,blocked,formattedid,name,objectid,owner,project,schedulestate,taskestimatetotal,taskremainingtotal,taskactualtotal,tasks&order=Rank&query=(Iteration = ${iteration})" + scoping + paging,
+            "defects"           : "/defect?fetch=description,notes,rank,blocked,formattedid,name,objectid,owner,project,schedulestate,taskestimatetotal,taskremainingtotal,taskactualtotal&order=Rank&query=(Iteration = ${iteration})" + scoping + paging,
             "defectsuite"       : "/defectsuite?fetch=rank,blocked,formattedid,name,objectid,owner,project,schedulestate,taskestimatetotal,taskremainingtotal,taskactualtotal&order=Rank&query=(Iteration = ${iteration})" + scoping + paging,
             "testsets"          : "/testset?fetch=rank,blocked,formattedid,name,objectid,owner,project,schedulestate,taskestimatetotal,taskremainingtotal,taskactualtotal&query=(Iteration = ${iteration})" + scoping + paging
         };
@@ -175,6 +175,8 @@ function initTaskboard() {
             html.push('<div class="id">' + value.FormattedID + '</div>');
             html.push('<div class="name">' + RALLY.toolkit.niceSubstring(value.Name, 100) + '</div>');
             html.push('<div class="' + ownerClass.join(' ') + '">' + owner + '</div>');
+            html.push('<div class="desc">' + value.Description + '</div>');
+            html.push('<div class="notes">' + value.Notes + '</div>');
 
             html.push(renderTimeCell((schema.TaskEstimateTotal) ? schema.TaskEstimateTotal.DisplayName : 'Est', value.TaskEstimateTotal, timeClass.join(' ')));
             html.push(renderTimeCell((schema.TaskRemainingTotal) ? schema.TaskRemainingTotal.DisplayName : 'To Do', value.TaskRemainingTotal, timeClass.join(' ')));
@@ -260,6 +262,8 @@ function initTaskboard() {
             html.push('<div class="id">' + item.FormattedID + '</div>');
             html.push('<div class="name">' + RALLY.toolkit.niceSubstring(item.Name) + '</div>');
             html.push('<div class="' + ownerClass.join(' ') + '">' + owner + '</div>');
+            html.push('<div class="desc">' + item.Description + '</div>');
+            html.push('<div class="notes">' + item.Notes + '</div>');
 
             html.push('<div class="time">');
             html.push(renderTimeCell((schema.Estimate) ? schema.Estimate.ShortName : 'Est', item.Estimate, estClass.join(' ')));
@@ -904,6 +908,21 @@ YAHOO.util.Event.addListener(window, 'load', initTaskboard);
 
     .rally-workprod .owner {
         margin-bottom: .5em;
+    }
+
+    .rally-workprod .desc, .rally-task .desc {
+      margin-bottom: .5em;
+      font-size: 0.9em;
+    }
+
+    .rally-workprod .notes, .rally-task .notes {
+      margin-bottom: 0.5em;
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    .rally-workprod .notes img, .rally-workprod .desc img, .rally-task .desc img, .rally-task .notes img {
+      max-width: 400px;
     }
 
         /** tasks **/

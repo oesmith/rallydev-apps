@@ -1,0 +1,18 @@
+{
+  "author": "Olly Smith <olly.smith@wildfireapp.com>",
+  "name": "rallydev-apps",
+  "description": "Slightly better apps for Rally.",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/oesmith/rallydev-apps.git"
+  },
+  "dependencies": {
+    "grunt-less": "0.1.5",
+    "grunt-handlebars": "0.0.4",
+    "grunt-coffee": "0.0.3"
+  },
+  "devDependencies": {
+  },
+  "optionalDependencies": {}
+}

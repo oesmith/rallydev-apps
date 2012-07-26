@@ -1,0 +1,1 @@
+Ralio = Ember.Application.create()

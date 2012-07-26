@@ -34,7 +34,7 @@ module.exports = function (grunt) {
       files: [
         '<config:coffee.app.src>',
         '<config:less.app.src>',
-        '<config:handlebars.templates.src>/**/*.handlebars'
+        'templates/**/*.handlebars'
       ],
       tasks: 'default'
     }

@@ -1,6 +1,10 @@
-Ralio.Project = DS.Model.extend
-  primaryKey: '_ref'
-  name: DS.attr 'string'
-Ralio.Project.reopenClass
-  type: 'project'
+Ralio.Project = Backbone.Model.extend(
+  {
+    idAttribute: '_ref'
+  }, {
+    type: 'project'
+  }
+)
 
+Ralio.ProjectCollection = Ralio.Collection.extend
+  model: Ralio.Project

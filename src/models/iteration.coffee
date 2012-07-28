@@ -1,4 +1,3 @@
-Ralio.Iteration = DS.Model.extend()
-Ralio.Iteration.reopenClass
+Ralio.Iteration = Backbone.Model.extend
   type: 'iteration'
 

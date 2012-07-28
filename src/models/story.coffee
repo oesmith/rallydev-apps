@@ -1,4 +1,3 @@
-Ralio.Story = DS.Model.extend()
-Ralio.Story.reopenClass
+Ralio.Story = Backbone.Model.extend
   type: ['defect', 'hierarchicalrequirement']
 

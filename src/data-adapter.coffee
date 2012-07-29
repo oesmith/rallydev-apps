@@ -9,51 +9,21 @@ source = (model) ->
     throw 'no data source found'
 
 
-type = (model) ->
-  if model.model? and model.model.type?
-    type = model.model.type
-  else if model.type?
-    type = model.type
-  else
-    throw 'no data type found'
-
-
 findAll = (model, options) ->
-  model_type = type(model)
-  if typeof model_type == 'string'
-    # single type
-    opts =
-      key: 'data'
-      type: model_type
-      fetch: true
-      query: ''
-    source(model).findAll(
-      opts
-      (object) -> options.success object.data
-      options.error
+  types = model.type()
+  if _(types).isString() then types = [types]
+  query = _(types).map (t) ->
+    _({}).extend(
+      { query: '', fetch: true, type: t, key: t }
+      _(options).pick('query', 'fetch', 'project')
     )
-  else
-    # dual types
-    opts = [
-      {
-        key: 'data1'
-        type: model_type[0]
-        fetch: true
-        query: ''
-      },
-      {
-        key: 'data2'
-        type: model_type[1]
-        fetch: true
-        query: ''
-      }
-    ]
-    source(model).findAll(
-      opts,
-      (object) ->
-        options.success object.data1.concat(object.data2)
-      options.error
-    )
+  source(model).findAll(
+    query
+    (o) ->
+      console.log o
+      options.success _.chain(o).pick(types).values().flatten().value()
+    options.error
+  )
 
 
 find = (model, options) ->

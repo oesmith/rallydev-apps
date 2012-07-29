@@ -1,6 +1,21 @@
-<ul>
-  {{#each project}}
-  <li>{{name}}</li>
-  {{/each}}
-</ul>
+<div class="row">
+  <div class="span12">
+    <select class='project-selector'>
+      <option>Choose..</option>
+      {{#each projects}}
+      <option value="{{_ref}}">{{Name}}</option>
+      {{/each}}
+    </select>
 
+    <select class='iteration-selector'>
+      {{#if project}}
+      <option>Choose..</option>
+      {{#each iterations}}
+      <option value="{{_ref}}">{{_refObjectName}}</option>
+      {{/each}}
+      {{else}}
+      <option>No project selected</option>
+      {{/if}}
+    </select>
+  </div>
+</div>

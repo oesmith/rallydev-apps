@@ -1,10 +1,6 @@
-Ralio.Project = Backbone.Model.extend(
-  {
-    idAttribute: '_ref'
-  }, {
-    type: 'project'
-  }
-)
+class Ralio.Project extends Ralio.Model
+  @_type: 'project'
 
-Ralio.ProjectCollection = Ralio.Collection.extend
+class Ralio.ProjectCollection extends Ralio.Collection
   model: Ralio.Project
+

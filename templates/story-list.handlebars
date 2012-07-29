@@ -1,0 +1,14 @@
+<div class='row'>
+  <div class='span12'>
+    <ul class='thumbnails'>
+      {{#each stories}}
+      <li class='span4'>
+        <div class='thumbnail story'>
+          <span class='badge state {{ScheduleState}}'>{{ScheduleState}}</span>
+          <h2>{{Name}}</h2>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
